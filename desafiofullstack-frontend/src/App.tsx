@@ -1,13 +1,12 @@
-import { RegisterPage } from './pages/RegisterPage'
-import './styles/App.css'
 import { GlobalStyles } from './styles/global'
+import { LadingPage } from './pages/LandingPage'
 
 function App() {
 
   return (
     <>
       <GlobalStyles />
-      <RegisterPage />
+      <LadingPage />
     </>
   )
 }
