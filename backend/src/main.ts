@@ -17,7 +17,7 @@ async function bootstrap() {
     .setTitle('Desafio Fullstack')
     .setDescription('API para trabalhar com Clientes e Contatos')
     .setVersion('1.0')
-    .addTag('clients')
+    .addTag('API')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

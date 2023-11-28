@@ -11,7 +11,9 @@ import {
 import { ClientsService } from './clients.service';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Clients')
 @Controller('clients')
 export class ClientsController {
   constructor(private readonly clientsService: ClientsService) {}
@@ -25,7 +27,7 @@ export class ClientsController {
   findAll() {
     return this.clientsService.findAll();
   }
-
+  //TODO CRIAR ROTAS COM AUTENTICAÇÃO PARA VERIFICAR O CLIENTE
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.clientsService.findOne(id);
