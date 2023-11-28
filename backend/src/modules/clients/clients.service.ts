@@ -1,37 +1,80 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
+import { PrismaService } from 'src/database/prisma.service';
 import { Client } from './entities/client.entity';
+import { plainToInstance } from 'class-transformer';
 
 @Injectable()
 export class ClientsService {
-  private clients: Client[] = [];
-  create(createClientDto: CreateClientDto) {
+  constructor(private prisma: PrismaService) {}
+
+  async create(createClientDto: CreateClientDto) {
+    const foundClient = await this.prisma.user.findFirst({
+      where: { email: createClientDto.email },
+    });
+
+    if (foundClient) {
+      throw new ConflictException('User already exists.');
+    }
+
     const client = new Client();
     Object.assign(client, { ...createClientDto });
-    this.clients.push(client);
-    return client;
-  }
 
-  findAll() {
-    return this.clients;
-  }
+    const createdClient = await this.prisma.user.create({
+      data: { ...client },
+    });
 
-  findOne(id: string) {
-    const foundClient = this.clients.find((client) => client.id === id);
+    return plainToInstance(Client, createdClient);
+  }
+  async findByEmail(email: string) {
+    const foundClient = await this.prisma.user.findFirst({
+      where: { email },
+    });
+
     return foundClient;
   }
 
-  update(id: string, updateClientDto: UpdateClientDto) {
-    const clientIndex = this.clients.findIndex((user) => user.id === id);
-    this.clients[clientIndex] = {
-      ...this.clients[clientIndex],
-      ...updateClientDto,
-    };
+  async findAll() {
+    const clients = await this.prisma.user.findMany();
+    return plainToInstance(Client, clients);
   }
 
-  remove(id: string) {
-    const clientIndex = this.clients.findIndex((user) => user.id === id);
-    this.clients.splice(clientIndex, 1);
+  async findOne(id: string) {
+    const foundClient = await this.prisma.user.findUnique({ where: { id } });
+
+    if (!foundClient) {
+      throw new NotFoundException('User not found.');
+    }
+    return plainToInstance(Client, foundClient);
+  }
+
+  async update(id: string, updateClientDto: UpdateClientDto) {
+    const foundClient = await this.prisma.user.findUnique({ where: { id } });
+
+    if (!foundClient) {
+      throw new NotFoundException('User not found.');
+    }
+
+    const updatedClient = await this.prisma.user.update({
+      where: { id },
+      data: { ...updateClientDto },
+    });
+
+    return plainToInstance(Client, updatedClient);
+  }
+
+  async remove(id: string) {
+    const foundClient = await this.prisma.user.findUnique({ where: { id } });
+
+    if (!foundClient) {
+      throw new NotFoundException('User not found.');
+    }
+
+    await this.prisma.user.delete({ where: { id } });
   }
 }
