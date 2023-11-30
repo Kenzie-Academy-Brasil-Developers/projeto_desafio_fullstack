@@ -3,10 +3,13 @@ import { StyledLoginPage } from "./style"
 import { TLoginData, loginSchema } from "./validator"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Input from "../../components/Input"
+import { useAuth } from "../../hooks/useAuth"
 
 
 
 export const LoginPage = () => {
+
+    const { signIn } = useAuth()
 
     const { register, handleSubmit, formState: { errors } } = useForm<TLoginData>({
         resolver: zodResolver(loginSchema)
@@ -14,6 +17,7 @@ export const LoginPage = () => {
 
     const submit: SubmitHandler<TLoginData> = (data: TLoginData): void => {
         console.log(data)
+        signIn(data)
     }
     return (
         <StyledLoginPage>
