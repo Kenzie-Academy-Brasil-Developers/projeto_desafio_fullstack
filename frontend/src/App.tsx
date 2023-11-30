@@ -1,12 +1,12 @@
 import { GlobalStyles } from './styles/global'
-import { LadingPage } from './pages/LandingPage'
+import { RoutesMain } from './routes/index.routes';
 
 function App() {
 
   return (
     <>
       <GlobalStyles />
-      <LadingPage />
+      <RoutesMain />
     </>
   )
 }

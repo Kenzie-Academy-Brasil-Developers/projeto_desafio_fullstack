@@ -8,8 +8,11 @@ export const StyledLandingPage = styled.main`
   justify-content: center;
   align-items: center;
   > div {
-    width: 100%;
-    height: 90%;
+    width: 90%;
+    height: 100%;
     background-color: var(--gray-0);
+    .div_container {
+      color: var(--color-secundary);
+    }
   }
 `;

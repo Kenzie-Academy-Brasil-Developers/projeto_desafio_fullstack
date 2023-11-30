@@ -24,12 +24,13 @@ export const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         border: none;
+        outline: 0;
         list-style: none;
         text-decoration: none;
     }
-    body {
-        height: 100%;
-        width: 100%;
+    body, html {
+        height: 100vh;
+        width: 100vw;
     }
     main {
         font-family: "Inter", sans-serif;
