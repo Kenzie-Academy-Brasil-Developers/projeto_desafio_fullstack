@@ -1,12 +1,15 @@
 import { GlobalStyles } from './styles/global'
-import { LadingPage } from './pages/LandingPage'
+import { RoutesMain } from './routes/index.routes';
+import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
 
   return (
     <>
       <GlobalStyles />
-      <LadingPage />
+      <AuthProvider>
+        <RoutesMain />
+      </AuthProvider>
     </>
   )
 }
