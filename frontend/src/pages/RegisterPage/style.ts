@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledLandingPage = styled.main`
+export const StyledRegisterPage = styled.main`
   width: 100%;
   height: 100vh;
   background-color: var(--color-darkred);
@@ -8,8 +8,16 @@ export const StyledLandingPage = styled.main`
   justify-content: center;
   align-items: center;
   > div {
-    width: 100%;
-    height: 90%;
+    width: 90%;
+    height: 100%;
     background-color: var(--gray-0);
+    .div_container {
+      color: var(--color-secondary);
+      .form_container {
+        width: 90%;
+        display: flex;
+        
+      }
+    }
   }
 `;
