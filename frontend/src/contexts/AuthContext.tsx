@@ -10,6 +10,7 @@ interface AuthContextProps {
 
 interface AuthContextValues {
     signIn: (data: TLoginData) => void;
+    register: (data: string) => void;
 }
 
 
@@ -33,8 +34,20 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
 
     }
 
+    const register = async (data: string) => {
+        try {
+            const response = await api.post("/users", data)
+            const { token } = response.data
+            api.defaults.headers.common.Authorization = `Bearer ${token}`
+            localStorage.setItem("clientToken", token)
+            navigate("contacts")
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
-        <AuthContext.Provider value={{ signIn }}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={{ signIn, register }}>{children}</AuthContext.Provider>
     )
 }
 

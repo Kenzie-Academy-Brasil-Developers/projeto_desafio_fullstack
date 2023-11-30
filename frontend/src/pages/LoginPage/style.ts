@@ -43,6 +43,16 @@ export const StyledLoginPage = styled.main`
         border: 1px solid var(--color-secondary);
         border-radius: 8px;
 
+        .form_button--register {
+          border: none;
+          background: none;
+          color: var(--color-secondary);
+        }
+
+        .form_button--register:hover {
+          color: white;
+        }
+
         .form_button--submit {
           margin-top: 0.75rem;
           background-color: transparent;

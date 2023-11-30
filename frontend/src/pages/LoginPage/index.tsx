@@ -4,6 +4,7 @@ import { TLoginData, loginSchema } from "./validator"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Input from "../../components/Input"
 import { useAuth } from "../../hooks/useAuth"
+import { useNavigate } from "react-router-dom"
 
 
 
@@ -15,10 +16,12 @@ export const LoginPage = () => {
         resolver: zodResolver(loginSchema)
     });
 
+    const navigate = useNavigate()
+
     const submit: SubmitHandler<TLoginData> = (data: TLoginData): void => {
-        console.log(data)
         signIn(data)
     }
+    
     return (
         <StyledLoginPage>
             <div className="title_container">
@@ -45,6 +48,7 @@ export const LoginPage = () => {
                         {...register("password")}
                         error={errors.password && errors.password.message}
                     />
+                    <small>Ainda não possui conta? <button className="form_button--register" onClick={() => navigate("/register")}>Cadastre-se</button></small>
                     <button className="form_button--submit " type="submit">Entrar</button>
                 </form>
             </div>
