@@ -1,37 +1,29 @@
+import { useState } from "react"
 import { useRegister } from "../../hooks/useRegister"
-import { ContactItem } from "./ContactList/ContactItem"
+import { ContactList } from "./ContactList"
 import { StyledContactContainer } from "./style"
+import { Modal } from "../Modal"
 
 
 export const ContactContainer = () => {
 
     const { removeCount } = useRegister()
+    const [modalState, setModalState] = useState<boolean>(false)
+    const toggleModal = () => {
+        setModalState(!modalState)
+    }
 
 
     return (
         <StyledContactContainer>
             <div className="contact__heading">
                 <h3 className="contact_heading--title">Seus contatos</h3>
-                <button className="contact_heading--button">Adicionar</button>
+                <button className="contact_heading--button" onClick={toggleModal}>Adicionar</button>
             </div>
 
-            <ul className="contact__list">
-                {/* {contacts.length === 0 ?
-                    <span className="contact__list--span">Você ainda não possui nenhum contato associado.</span>
-                    :
-                    <ContactItem name={"ericzin"} tel={"88585594"} />
-                } */}
-                <ContactItem name={"ericzin"} tel={"88585594"} />
-                <ContactItem name={"ericzin"} tel={"88585594"} />
-                <ContactItem name={"ericzin"} tel={"88585594"} />
-                <ContactItem name={"ericzin"} tel={"88585594"} />
-                <ContactItem name={"ericzin"} tel={"88585594"} />
-                <ContactItem name={"ericzin"} tel={"88585594"} />
-                <ContactItem name={"ericzin"} tel={"88585594"} />
-                <ContactItem name={"ericzinaaa"} tel={"88585594"} />
-                <ContactItem name={"ericzin"} tel={"88585594"} />
-                <ContactItem name={"ericzinaasdfsdf"} tel={"88585594"} />
-            </ul>
+            {modalState && <Modal toggleModal={toggleModal} />}
+
+            <ContactList />
 
             <div className="contact__buttons">
                 <button className="contact__button" onClick={removeCount}>Voltar</button>

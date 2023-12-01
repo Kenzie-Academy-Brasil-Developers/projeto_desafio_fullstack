@@ -1,4 +1,5 @@
 import { useRegister } from "../../../hooks/useRegister"
+import { ContactItem } from "./ContactItem"
 
 
 export const ContactList = () => {
@@ -8,7 +9,7 @@ export const ContactList = () => {
             {contacts.length === 0 ?
                 <span className="contact__list--span">Você ainda não possui nenhum contato associado.</span>
                 :
-                <li></li>
+                contacts.map(({ name, telephone }) => <ContactItem name={name} tel={telephone} />)
             }
         </ul>
     )
