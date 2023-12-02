@@ -2,6 +2,8 @@ import { StyledModalContainer } from "./style"
 import { useForm } from 'react-hook-form';
 import { ModalSchema, TModalSchema } from "./validator";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Input from "../Input";
+import { useRegister } from "../../hooks/useRegister";
 
 
 interface ModalProps {
@@ -11,15 +13,16 @@ interface ModalProps {
 interface IModalFields {
     name: string;
     email: string;
-    password: string;
+    telephone: string;
 }
 
 export const Modal = ({ toggleModal }: ModalProps) => {
 
-    const { handleSubmit, register, /*formState: { errors }*/ } = useForm<TModalSchema>({ resolver: zodResolver(ModalSchema) })
-
+    const { handleSubmit, register, formState: { errors } } = useForm<TModalSchema>({ resolver: zodResolver(ModalSchema) })
+    const { contacts, setContacts } = useRegister()
     const submit = (data: IModalFields) => {
-        console.log(data)
+        setContacts([...contacts, data])
+        toggleModal()
     }
 
     return (
@@ -28,11 +31,11 @@ export const Modal = ({ toggleModal }: ModalProps) => {
                 <h2>Cadastrar Contatos</h2>
                 <button className="modal_card--close" onClick={toggleModal}>X</button>
 
-                <form className="form_container" onClick={handleSubmit(submit)}>
-                    <input id="name" placeholder="Insira o nome completo" {...register("name")} />
-                    <input id="email" placeholder="Insira o nome completo" {...register("email")} />
-                    <input id="tel" placeholder="Insira o nome completo" {...register("password")} />
-                    <button type="submit" className="form_button--submit">Cadastrar</button>
+                <form className="form_container" onSubmit={handleSubmit(submit)}>
+                    <Input id="modal_name" type="text" placeholder="Nome completo" {...register("name")} error={errors.name && errors.name.message} />
+                    <Input id="modal_email" type="text" placeholder="Email" {...register("email")} error={errors.email && errors.email.message} />
+                    <Input id="modal_tel" type="tel" placeholder="Telefone" {...register("telephone")} error={errors.telephone && errors.telephone.message} />
+                    <button type="submit" className="form_button--submit" >Cadastrar</button>
                 </form>
             </div>
         </StyledModalContainer>

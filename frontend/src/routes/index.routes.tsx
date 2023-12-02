@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom"
 import { LoginPage } from "../pages/LoginPage"
 import { RegisterPage } from "../pages/RegisterPage"
 import { RegisterProvider } from "../contexts/RegisterContext"
+import { NotFound } from "../pages/NotFound"
 
 
 export const RoutesMain = () => {
@@ -15,6 +16,7 @@ export const RoutesMain = () => {
                         <RegisterPage />
                     </RegisterProvider>}
             />
+            <Route path="*" element={<NotFound />} />
         </Routes>
     )
 }

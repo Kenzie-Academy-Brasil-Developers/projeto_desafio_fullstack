@@ -12,7 +12,10 @@ export const ContactContainer = () => {
     const toggleModal = () => {
         setModalState(!modalState)
     }
-
+    const register = () => {
+        // const clientInfo = localStorage.getItem("client_info")
+        
+    }
 
     return (
         <StyledContactContainer>
@@ -27,7 +30,7 @@ export const ContactContainer = () => {
 
             <div className="contact__buttons">
                 <button className="contact__button" onClick={removeCount}>Voltar</button>
-                <button className="contact__button">Registrar</button>
+                <button className="contact__button" onClick={register}>Registrar</button>
             </div>
         </StyledContactContainer>
     )

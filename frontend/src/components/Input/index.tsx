@@ -2,7 +2,7 @@ import { ForwardedRef, InputHTMLAttributes, forwardRef } from "react";
 
 interface iInputProps extends InputHTMLAttributes<HTMLInputElement> {
     error?: string | null | undefined;
-    label: string;
+    label?: string;
     id: string;
 }
 
@@ -12,10 +12,10 @@ const Input = forwardRef((
 ) => (
     <div className="input_container">
         <div className="input_fieldset">
-            <label htmlFor={id}>{label}</label>
+            {label && <label htmlFor={id}>{label}</label>}
             <input id={id} ref={ref} {...rest} />
         </div>
-        {error && <small>{error}</small>}
+        {error && <small >{error}</small>}
     </div >
 )
 );

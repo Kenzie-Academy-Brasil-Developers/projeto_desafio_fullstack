@@ -13,11 +13,11 @@ export const GlobalStyles = createGlobalStyle`
         --gray-1: #828282;
         --gray-2: #E0E0E0;
         --gray-3: #F5F5F5;
-        --heading-1: bold 1.625rem "Inter";
-        --heading-2: bold 1.375rem "Inter";
-        --heading-3: bold 1.125rem "Inter";
-        --headline: 1rem "Inter";
-        --body: .875rem "Inter";
+        --heading-1: bold 1.625rem "Poppins";
+        --heading-2: bold 1.375rem "Poppins";
+        --heading-3: bold 1.125rem "Poppins";
+        --headline: 1rem "Poppins";
+        --body: .875rem "Poppins";
     }
     *{
         box-sizing: border-box;
@@ -33,7 +33,7 @@ export const GlobalStyles = createGlobalStyle`
         width: 100vw;
     }
     main {
-        font-family: "Inter", sans-serif;
+        font-family: "Poppins", sans-serif;
     }
 
     button{

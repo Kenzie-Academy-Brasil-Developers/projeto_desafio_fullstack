@@ -19,7 +19,8 @@ export const FormContainer = () => {
         addCount()
     };
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    
     return (
         <StyledFormContainer>
             <h2>Cadastre-se</h2>

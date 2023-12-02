@@ -47,8 +47,8 @@ export const StyledContactContainer = styled.div`
       align-items: center;
       gap: .25rem;
       flex-direction: column;
-      width: 18%;
-      height: 55%;
+      width: 25%;
+      height: 70%;
       border: 1px solid white;
       padding: 0.5rem;
       border-radius: 4px;
@@ -63,7 +63,7 @@ export const StyledContactContainer = styled.div`
       }
       small {
         color: greenyellow;
-        letter-spacing: 2px;
+        letter-spacing: 1px;
       }
     }
     .contact__list--item:hover {
