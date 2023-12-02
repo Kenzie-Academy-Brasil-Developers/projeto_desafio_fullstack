@@ -39,6 +39,9 @@ export const StyledFormContainer = styled.div`
           font-size: 0.9rem;
           border-radius: 4px;
         }
+        input[type="number"]::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+        }
         label {
           width: 15%;
         }

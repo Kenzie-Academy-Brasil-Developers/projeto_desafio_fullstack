@@ -2,6 +2,7 @@ import { ReactNode, createContext } from "react";
 import { TLoginData } from "../pages/LoginPage/validator";
 import { api } from '../services/api';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 
 interface AuthContextProps {
@@ -11,6 +12,14 @@ interface AuthContextProps {
 interface AuthContextValues {
     signIn: (data: TLoginData) => void;
     register: (data: string) => void;
+    user: IUser | null;
+    setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
+}
+
+export interface IUser {
+    full_name: string;
+    email: string;
+    telephone: string;
 }
 
 
@@ -20,6 +29,8 @@ export const AuthContext = createContext<AuthContextValues>({} as AuthContextVal
 export const AuthProvider = ({ children }: AuthContextProps) => {
 
     const navigate = useNavigate();
+
+    const [user, setUser] = useState<IUser | null>(null);
 
     const signIn = async (data: TLoginData) => {
         try {
@@ -47,7 +58,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     }
 
     return (
-        <AuthContext.Provider value={{ signIn, register }}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={{ signIn, register, user, setUser }}>{children}</AuthContext.Provider>
     )
 }
 

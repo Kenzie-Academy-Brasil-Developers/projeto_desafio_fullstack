@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const StyledContactContainer = styled.div`
-  margin-top: 2rem;
   width: 80%;
   height: 80%;
   display: flex;
@@ -33,7 +32,7 @@ export const StyledContactContainer = styled.div`
   }
 
   .contact__list {
-    height: 70%;
+    height: 75%;
     padding: 2rem;
     border: 1px solid var(--color-secondary);
     border-radius: 4px;
@@ -45,7 +44,7 @@ export const StyledContactContainer = styled.div`
     .contact__list--item {
       display: flex;
       align-items: center;
-      gap: .25rem;
+      gap: 0.25rem;
       flex-direction: column;
       width: 25%;
       height: 70%;
@@ -101,5 +100,9 @@ export const StyledContactContainer = styled.div`
       background-color: var(--color-secondary);
       color: var(--gray-0);
     }
+  }
+  #loading {
+    align-self: center;
+    margin: auto;
   }
 `;

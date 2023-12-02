@@ -20,7 +20,7 @@ export const FormContainer = () => {
     };
 
     const navigate = useNavigate();
-    
+
     return (
         <StyledFormContainer>
             <h2>Cadastre-se</h2>
@@ -32,8 +32,8 @@ export const FormContainer = () => {
                     label='Nome'
                     placeholder='Insira seu nome'
                     type='text'
-                    {...register("name")}
-                    error={errors.name && errors.name.message}
+                    {...register("full_name")}
+                    error={errors.full_name && errors.full_name.message}
                 />
                 <Input
                     id='email'
@@ -53,9 +53,11 @@ export const FormContainer = () => {
                 />
                 <Input
                     id='telephone'
-                    label='Telephone'
+                    label='Telephone(+55)'
                     placeholder='Insira seu telefone'
-                    type='tel'
+                    type='number'
+                    maxLength={11}
+                    pattern="[0-9]{2} [0-9]{5}-[0-9]{4}"
                     {...register("telephone")}
                     error={errors.telephone && errors.telephone.message}
                 />

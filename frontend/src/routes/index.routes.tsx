@@ -3,6 +3,7 @@ import { LoginPage } from "../pages/LoginPage"
 import { RegisterPage } from "../pages/RegisterPage"
 import { RegisterProvider } from "../contexts/RegisterContext"
 import { NotFound } from "../pages/NotFound"
+import { DashboardPage } from "../pages/DashboardPage"
 
 
 export const RoutesMain = () => {
@@ -17,6 +18,7 @@ export const RoutesMain = () => {
                     </RegisterProvider>}
             />
             <Route path="*" element={<NotFound />} />
+            <Route path="/dashboard" element={<RegisterProvider><DashboardPage /></RegisterProvider>} />
         </Routes>
     )
 }
