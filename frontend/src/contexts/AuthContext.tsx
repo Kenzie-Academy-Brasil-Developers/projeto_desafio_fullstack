@@ -9,17 +9,26 @@ interface AuthContextProps {
     children: ReactNode
 }
 
+export interface IUser {
+    id: string;
+    full_name: string;
+    email: string;
+    telephone: string;
+    register_date: string
+}
+
+export interface IContact {
+    name: string;
+    email: string;
+    telephone: string;
+}
 interface AuthContextValues {
     signIn: (data: TLoginData) => void;
     register: (data: string) => void;
     user: IUser | null;
     setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
-}
-
-export interface IUser {
-    full_name: string;
-    email: string;
-    telephone: string;
+    contacts: IContact[]
+    setContacts: React.Dispatch<React.SetStateAction<IContact[]>>
 }
 
 
@@ -31,6 +40,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     const navigate = useNavigate();
 
     const [user, setUser] = useState<IUser | null>(null);
+    const [contacts, setContacts] = useState<IContact[]>([])
 
     const signIn = async (data: TLoginData) => {
         try {
@@ -58,7 +68,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     }
 
     return (
-        <AuthContext.Provider value={{ signIn, register, user, setUser }}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={{ signIn, register, user, setUser, contacts, setContacts }}>{children}</AuthContext.Provider>
     )
 }
 

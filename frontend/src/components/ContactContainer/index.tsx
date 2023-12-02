@@ -3,25 +3,32 @@ import { useRegister } from "../../hooks/useRegister"
 import { ContactList } from "./ContactList"
 import { StyledContactContainer } from "./style"
 import { Modal } from "../Modal"
-// import { api } from "../../services/api"
+import { api } from "../../services/api"
+import { useAuth } from "../../hooks/useAuth"
 
 
 export const ContactContainer = () => {
 
-    const { removeCount } = useRegister()
+    const { removeCount, addCount } = useRegister()
+    const { setUser, contacts } = useAuth()
     const [modalState, setModalState] = useState<boolean>(false)
+    const [loading, setLoading] = useState(false)
+
     const toggleModal = () => {
         setModalState(!modalState)
     }
-    const [loading, setLoading] = useState(false)
     const register = async () => {
+        addCount()
         try {
             setLoading(true)
             const clientInfo = localStorage.getItem("client_info")
             const parsedInfo = JSON.parse(clientInfo!)
-            console.log(parsedInfo)
-            // const response = await api.post("/client", { parsedInfo })
+            const response = await api.post("/clients", { ...parsedInfo })
+            contacts.forEach(async (data) => await api.post("/contacts", { data }))
+            setUser(response.data)
         } catch (error) {
+            removeCount()
+            setLoading(false)
             console.log(error)
         } finally {
             setLoading(false)
