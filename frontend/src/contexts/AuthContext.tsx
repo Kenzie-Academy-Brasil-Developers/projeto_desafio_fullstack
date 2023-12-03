@@ -3,6 +3,9 @@ import { createContext } from "react";
 import { api } from '../services/api';
 import { useState } from 'react';
 import { AuthContextProps, AuthContextValues, IContact, IUser, TLoginData, TRegisterData } from "../interfaces";
+import { jwtDecode } from 'jwt-decode';
+import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
 
 
 export const AuthContext = createContext<AuthContextValues>({} as AuthContextValues)
@@ -20,8 +23,17 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
         try {
             const response = await api.post("/login", data)
             localStorage.setItem("clientToken", response.data.token)
-            navigate("/dashboard")
+            const decoded = jwtDecode(response.data.token)
+            localStorage.setItem("clientId", decoded.sub!)
+            toast.success("Login realizado com sucesso", { autoClose: 3000 })
+            setTimeout(() => {
+                navigate("/dashboard")
+            }, 3000)
+            return response
         } catch (error) {
+            if (error instanceof AxiosError) {
+                toast.error(`${error.response?.data.message}`)
+            }
             console.log(error)
         }
 
@@ -30,14 +42,13 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     const register = async (data: TRegisterData) => {
         try {
             const response = await api.post("/clients", data)
-            const { email, password } = data;
+            const { data: { email, password, id } } = response;
+            localStorage.setItem("clientId", JSON.stringify(id));
             const logged = await api.post("/login", { email, password })
                 .then(res => {
-                    localStorage.setItem("clientToken", res.data)
-                    localStorage.setItem("clientId", res.data.user.id)
+                    localStorage.setItem("clientToken", JSON.stringify(res.data.token))
                 })
             contacts.forEach(async (data) => await api.post("/contacts", { data }))
-            setUser(response.data)
             return logged
         } catch (error) {
             console.log(error)

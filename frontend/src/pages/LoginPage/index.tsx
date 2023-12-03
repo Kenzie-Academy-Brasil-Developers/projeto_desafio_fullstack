@@ -1,10 +1,12 @@
 import { useForm, SubmitHandler } from "react-hook-form"
 import { StyledLoginPage } from "./style"
-import { TLoginData, loginSchema } from "./validator"
+import { loginSchema } from "./validator"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Input from "../../components/Input"
 import { useAuth } from "../../hooks/useAuth"
 import { useNavigate } from "react-router-dom"
+import { TLoginData } from "../../interfaces"
+import { ToastContainer } from 'react-toastify';
 
 
 
@@ -21,7 +23,7 @@ export const LoginPage = () => {
     const submit: SubmitHandler<TLoginData> = (data: TLoginData): void => {
         signIn(data)
     }
-    
+
     return (
         <StyledLoginPage>
             <div className="title_container">
@@ -52,6 +54,7 @@ export const LoginPage = () => {
                     <button className="form_button--submit " type="submit">Entrar</button>
                 </form>
             </div>
+            <ToastContainer className={"toast_container"} />
         </StyledLoginPage>
     )
 }

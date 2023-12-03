@@ -14,10 +14,7 @@ export const registerSchema = z
       .regex(/(?=.*?[A-Z])/, "É necessário pelo menos uma letra maiúscula.")
       .regex(/(?=.*?[0-9])/, "É necessário pelo menos uma letra número."),
     confirmPassword: z.string().min(1, "É necessário confirmar sua senha"),
-    telephone: z
-      .string()
-      .min(1, "*Campo obrigatório")
-      .max(11, "Máxmio de 11 caracteres"),
+    telephone: z.string().length(11, "Número inválido"),
   })
   .refine(({ password, confirmPassword }) => password === confirmPassword, {
     message: "As senhas não correspondem",

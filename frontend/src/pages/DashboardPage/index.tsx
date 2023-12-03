@@ -9,13 +9,17 @@ import { useAuth } from "../../hooks/useAuth"
 
 export const DashboardPage = () => {
     const navigate = useNavigate()
-    const { setUser, setContacts } = useAuth()
+    const { setUser, setContacts, user } = useAuth()
+    const token = localStorage.getItem("clientToken");
+    const clientId = localStorage.getItem("clientId")
 
     useEffect(() => {
-        async () => {
+        const checkVerifications = async () => {
+
             try {
-                const token = localStorage.getItem("clientToken");
-                const clientId = localStorage.getItem("clientId")
+                if (!token) return navigate("/")
+
+
                 if (!token) {
                     return navigate("/")
                 }
@@ -35,16 +39,29 @@ export const DashboardPage = () => {
                 console.log(error)
             }
         }
+        checkVerifications()
     }, [])
+
+    if (!user) {
+        return navigate("/")
+    }
+
+    const logout = () => {
+        localStorage.clear()
+        setUser(null)
+        setContacts([])
+        return navigate("/")
+    }
 
     return (
         <StyledDashboardContainer>
             <div className="client_card">
                 <div className="client_card--profile">
                     <h3>Informações Gerais</h3>
-                    <Fieldset label={"Nome Completo"} info={"full_name"} />
-                    <Fieldset label={"Email"} info={"ericviniciusfelixsilva@gmail.com"} />
-                    <Fieldset label={"Telefone"} info={"69981596969"} />
+                    <button id="logout" onClick={logout}>Sair</button>
+                    <Fieldset label={"Nome Completo"} info={user.full_name} />
+                    <Fieldset label={"Email"} info={user.email} />
+                    <Fieldset label={"Telefone"} info={user.telephone} />
                 </div>
 
                 <div className="client_card--contacts">
