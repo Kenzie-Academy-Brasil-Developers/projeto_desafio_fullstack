@@ -20,6 +20,8 @@ export interface AuthContextValues {
   setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
   contacts: IContact[];
   setContacts: React.Dispatch<React.SetStateAction<IContact[]>>;
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IUser {
@@ -28,6 +30,7 @@ export interface IUser {
   email: string;
   telephone: string;
   register_date: string;
+  contacts?: IContact[];
 }
 
 export interface IContact {

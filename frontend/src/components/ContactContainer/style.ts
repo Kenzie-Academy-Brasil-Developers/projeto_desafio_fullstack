@@ -101,8 +101,4 @@ export const StyledContactContainer = styled.div`
       color: var(--gray-0);
     }
   }
-  #loading {
-    align-self: center;
-    margin: auto;
-  }
 `;

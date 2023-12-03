@@ -14,14 +14,13 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
 
     const [user, setUser] = useState<IUser | null>(null);
     const [contacts, setContacts] = useState<IContact[]>([])
+    const [loading, setLoading] = useState(true)
 
     const signIn = async (data: TLoginData) => {
         try {
             const response = await api.post("/login", data)
-            const { token } = response.data
-            api.defaults.headers.common.Authorization = `Bearer ${token}`
-            localStorage.setItem("clientToken", token)
-            navigate("dashboard")
+            localStorage.setItem("clientToken", response.data.token)
+            navigate("/dashboard")
         } catch (error) {
             console.log(error)
         }
@@ -31,16 +30,22 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     const register = async (data: TRegisterData) => {
         try {
             const response = await api.post("/clients", data)
-            const { token } = response.data
-            api.defaults.headers.common.Authorization = `Bearer ${token}`
-            localStorage.setItem("clientToken", token)
+            const { email, password } = data;
+            const logged = await api.post("/login", { email, password })
+                .then(res => {
+                    localStorage.setItem("clientToken", res.data)
+                    localStorage.setItem("clientId", res.data.user.id)
+                })
+            contacts.forEach(async (data) => await api.post("/contacts", { data }))
+            setUser(response.data)
+            return logged
         } catch (error) {
             console.log(error)
         }
     }
 
     return (
-        <AuthContext.Provider value={{ signIn, register, user, setUser, contacts, setContacts }}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={{ signIn, register, user, setUser, contacts, setContacts, loading, setLoading }}>{children}</AuthContext.Provider>
     )
 }
 

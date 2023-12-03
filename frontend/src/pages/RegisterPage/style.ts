@@ -24,4 +24,8 @@ export const StyledRegisterPage = styled.main`
       margin: 2rem 0;
     }
   }
+  #loading {
+    align-self: center;
+    margin: auto;
+  }
 `;

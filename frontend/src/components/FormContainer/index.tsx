@@ -46,11 +46,19 @@ export const FormContainer = () => {
                 />
                 <Input
                     id='password'
-                    label='Password'
+                    label='Senha'
                     placeholder='Insira sua senha'
                     type='password'
                     {...register("password")}
                     error={errors.password && errors.password.message}
+                />
+                <Input
+                    id='confirm'
+                    label='Confirmar Senha'
+                    placeholder='Confirme sua senha'
+                    type='password'
+                    {...register("confirmPassword")}
+                    error={errors.confirmPassword && errors.confirmPassword.message}
                 />
                 <Input
                     id='telephone'
