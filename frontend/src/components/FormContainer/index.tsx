@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom"
 import { StyledFormContainer } from "./styles"
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { TRegisterData, registerSchema } from "../../pages/RegisterPage/validator";
+import { registerSchema } from "../../pages/RegisterPage/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRegister } from "../../hooks/useRegister";
 import Input from "../Input";
+import { TRegisterData } from "../../interfaces";
 
 
 export const FormContainer = () => {
@@ -19,7 +20,8 @@ export const FormContainer = () => {
         addCount()
     };
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
     return (
         <StyledFormContainer>
             <h2>Cadastre-se</h2>
@@ -31,8 +33,8 @@ export const FormContainer = () => {
                     label='Nome'
                     placeholder='Insira seu nome'
                     type='text'
-                    {...register("name")}
-                    error={errors.name && errors.name.message}
+                    {...register("full_name")}
+                    error={errors.full_name && errors.full_name.message}
                 />
                 <Input
                     id='email'
@@ -44,17 +46,27 @@ export const FormContainer = () => {
                 />
                 <Input
                     id='password'
-                    label='Password'
+                    label='Senha'
                     placeholder='Insira sua senha'
                     type='password'
                     {...register("password")}
                     error={errors.password && errors.password.message}
                 />
                 <Input
+                    id='confirm'
+                    label='Confirmar Senha'
+                    placeholder='Confirme sua senha'
+                    type='password'
+                    {...register("confirmPassword")}
+                    error={errors.confirmPassword && errors.confirmPassword.message}
+                />
+                <Input
                     id='telephone'
-                    label='Telephone'
+                    label='Telephone(+55)'
                     placeholder='Insira seu telefone'
-                    type='tel'
+                    type='number'
+                    maxLength={11}
+                    pattern="[0-9]{2} [0-9]{5}-[0-9]{4}"
                     {...register("telephone")}
                     error={errors.telephone && errors.telephone.message}
                 />

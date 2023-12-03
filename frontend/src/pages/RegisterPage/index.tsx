@@ -18,6 +18,8 @@ export const RegisterPage = () => {
 
                 {count == 2 && <ContactContainer />}
 
+                {count == 3 && <h3 id="loading">Carregando suas informações ...</h3>}
+
             </div>
         </StyledRegisterPage>
     )

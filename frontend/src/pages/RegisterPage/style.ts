@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const StyledRegisterPage = styled.main`
-
   width: 100%;
   height: 100vh;
   overflow: hidden;
@@ -22,7 +21,11 @@ export const StyledRegisterPage = styled.main`
       display: flex;
       align-items: center;
       justify-content: space-around;
-      margin: 3rem 0 2rem 0;
+      margin: 2rem 0;
     }
+  }
+  #loading {
+    align-self: center;
+    margin: auto;
   }
 `;

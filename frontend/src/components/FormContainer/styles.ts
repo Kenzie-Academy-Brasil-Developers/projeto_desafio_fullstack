@@ -11,7 +11,7 @@ export const StyledFormContainer = styled.div`
     width: 80%;
     height: 100%;
     display: flex;
-    gap: 3rem;
+    gap: 2.5rem;
     flex-direction: column;
     margin: 2rem 0;
     > .input_container {
@@ -39,8 +39,12 @@ export const StyledFormContainer = styled.div`
           font-size: 0.9rem;
           border-radius: 4px;
         }
+        input[type="number"]::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+        }
         label {
           width: 15%;
+          font-size: 0.9rem;
         }
       }
     }
