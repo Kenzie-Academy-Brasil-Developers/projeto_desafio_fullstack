@@ -1,10 +1,5 @@
-import { IContact } from "../../../contexts/RegisterContext";
+import { IDashboardListItem } from "../../../interfaces/props.interface";
 import { Fieldset } from "../../Fieldset"
-
-interface IDashboardListItem {
-    number: number;
-    info: IContact;
-}
 
 
 export const DashboardListItem = ({ number, info }: IDashboardListItem) => {

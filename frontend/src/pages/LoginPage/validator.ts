@@ -7,5 +7,3 @@ export const loginSchema = z.object({
     .email("O email está incorreto"),
   password: z.string().min(8, "Mínimo de 8 caracteres"),
 });
-
-export type TLoginData = z.infer<typeof loginSchema>;

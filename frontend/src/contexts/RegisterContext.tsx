@@ -1,17 +1,5 @@
-import React, { ReactNode, createContext, useState } from "react";
-
-
-interface RegisterContextProps {
-    children: ReactNode
-}
-
-
-interface RegisterContextValues {
-    count: number;
-    setCount: React.Dispatch<React.SetStateAction<number>>;
-    addCount: () => void
-    removeCount: () => void
-}
+import { createContext, useState } from "react";
+import { RegisterContextProps, RegisterContextValues } from "../interfaces";
 
 
 export const RegisterContext = createContext<RegisterContextValues>({} as RegisterContextValues)

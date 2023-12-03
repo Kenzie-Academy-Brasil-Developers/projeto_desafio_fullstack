@@ -1,10 +1,5 @@
+import { IContactItemProps } from '../../../../interfaces/props.interface';
 
-
-
-interface IContactItemProps {
-    name: string;
-    tel: string
-}
 
 export const ContactItem = ({ name, tel }: IContactItemProps) => {
     return (

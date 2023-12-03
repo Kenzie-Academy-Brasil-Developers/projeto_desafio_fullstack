@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom"
 import { StyledFormContainer } from "./styles"
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { TRegisterData, registerSchema } from "../../pages/RegisterPage/validator";
+import { registerSchema } from "../../pages/RegisterPage/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRegister } from "../../hooks/useRegister";
 import Input from "../Input";
+import { TRegisterData } from "../../interfaces";
 
 
 export const FormContainer = () => {

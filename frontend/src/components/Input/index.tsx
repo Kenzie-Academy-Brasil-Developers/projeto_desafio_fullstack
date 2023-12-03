@@ -1,13 +1,8 @@
-import { ForwardedRef, InputHTMLAttributes, forwardRef } from "react";
-
-interface iInputProps extends InputHTMLAttributes<HTMLInputElement> {
-    error?: string | null | undefined;
-    label?: string;
-    id: string;
-}
+import { ForwardedRef, forwardRef } from "react";
+import { IInputProps } from "../../interfaces";
 
 const Input = forwardRef((
-    { id, label, error, ...rest }: iInputProps,
+    { id, label, error, ...rest }: IInputProps,
     ref: ForwardedRef<HTMLInputElement>
 ) => (
     <div className="input_container">

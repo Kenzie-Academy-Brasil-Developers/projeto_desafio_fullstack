@@ -1,35 +1,8 @@
-import { ReactNode, createContext } from "react";
-import { TLoginData } from "../pages/LoginPage/validator";
-import { api } from '../services/api';
 import { useNavigate } from 'react-router-dom';
+import { createContext } from "react";
+import { api } from '../services/api';
 import { useState } from 'react';
-
-
-interface AuthContextProps {
-    children: ReactNode
-}
-
-export interface IUser {
-    id: string;
-    full_name: string;
-    email: string;
-    telephone: string;
-    register_date: string
-}
-
-export interface IContact {
-    name: string;
-    email: string;
-    telephone: string;
-}
-interface AuthContextValues {
-    signIn: (data: TLoginData) => void;
-    register: (data: string) => void;
-    user: IUser | null;
-    setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
-    contacts: IContact[]
-    setContacts: React.Dispatch<React.SetStateAction<IContact[]>>
-}
+import { AuthContextProps, AuthContextValues, IContact, IUser, TLoginData, TRegisterData } from "../interfaces";
 
 
 export const AuthContext = createContext<AuthContextValues>({} as AuthContextValues)
@@ -55,13 +28,12 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
 
     }
 
-    const register = async (data: string) => {
+    const register = async (data: TRegisterData) => {
         try {
-            const response = await api.post("/users", data)
+            const response = await api.post("/clients", data)
             const { token } = response.data
             api.defaults.headers.common.Authorization = `Bearer ${token}`
             localStorage.setItem("clientToken", token)
-            navigate("contacts")
         } catch (error) {
             console.log(error)
         }

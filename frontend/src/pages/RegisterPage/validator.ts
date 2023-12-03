@@ -12,5 +12,3 @@ export const registerSchema = z.object({
     .min(1, "*Campo obrigatório")
     .max(11, "Máxmio de 11 caracteres"),
 });
-
-export type TRegisterData = z.infer<typeof registerSchema>;

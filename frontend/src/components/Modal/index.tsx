@@ -3,23 +3,14 @@ import { useForm } from 'react-hook-form';
 import { ModalSchema, TModalSchema } from "./validator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "../Input";
-import { useRegister } from "../../hooks/useRegister";
+import { useAuth } from "../../hooks/useAuth";
+import { IModalFields, ModalProps } from "../../interfaces/props.interface";
 
-
-interface ModalProps {
-    toggleModal: () => void
-}
-
-interface IModalFields {
-    name: string;
-    email: string;
-    telephone: string;
-}
 
 export const Modal = ({ toggleModal }: ModalProps) => {
 
     const { handleSubmit, register, formState: { errors } } = useForm<TModalSchema>({ resolver: zodResolver(ModalSchema) })
-    const { contacts, setContacts } = useRegister()
+    const { contacts, setContacts } = useAuth()
     const submit = (data: IModalFields) => {
         setContacts([...contacts, data])
         toggleModal()

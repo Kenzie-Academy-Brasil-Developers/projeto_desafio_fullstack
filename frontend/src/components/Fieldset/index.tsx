@@ -1,8 +1,5 @@
+import { IFieldsetProps } from "../../interfaces/props.interface"
 
-interface IFieldsetProps {
-    label: string;
-    info: string;
-}
 
 export const Fieldset = ({ label, info }: IFieldsetProps) => {
     return (
