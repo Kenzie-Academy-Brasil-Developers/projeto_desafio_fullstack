@@ -12,15 +12,11 @@ export class AuthService {
 
   async login(email: string, password: string) {
     const user = await this.clientService.findByEmail(email);
-    console.log(user);
 
     if (!user) {
       throw new UnauthorizedException('Invalid email or password.');
     }
-    console.log(password);
     const passwordMatch: boolean = await compare(password, user.password);
-
-    console.log(passwordMatch);
 
     if (!passwordMatch) {
       throw new UnauthorizedException('Invalid email or password.');
