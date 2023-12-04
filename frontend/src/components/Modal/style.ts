@@ -10,6 +10,7 @@ export const StyledModalContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 100;
   > .modal_card {
     position: relative;
     color: var(--color-secondary);

@@ -2,7 +2,8 @@ import { InputHTMLAttributes, ReactNode } from "react";
 import { IContact } from "./context.interface";
 
 export interface IContactItemProps {
-  name: string;
+  id: string;
+  full_name: string;
   tel: string;
 }
 
@@ -39,7 +40,7 @@ export interface ModalProps {
 }
 
 export interface IModalFields {
-  name: string;
+  full_name: string;
   email: string;
   telephone: string;
 }

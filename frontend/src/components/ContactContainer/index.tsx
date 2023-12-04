@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom"
 export const ContactContainer = () => {
 
     const { removeCount, addCount } = useRegister()
-    const { register, contacts, setContacts } = useAuth();
+    const { register, contacts, setContacts, setUser } = useAuth();
     const navigate = useNavigate()
     const [modalState, setModalState] = useState<boolean>(false)
 
@@ -33,9 +33,11 @@ export const ContactContainer = () => {
             const parsedInfo = JSON.parse(clientInfo!)
             register(parsedInfo)
             toast.success("Usuário criado com sucesso")
-            setContacts([])
             setTimeout(() => navigate("/dashboard"), 3000)
         } catch (error) {
+            setContacts([])
+            setUser(null)
+            navigate("/")
             return console.log(error)
         }
     }

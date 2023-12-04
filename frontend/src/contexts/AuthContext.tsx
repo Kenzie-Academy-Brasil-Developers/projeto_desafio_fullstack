@@ -44,10 +44,10 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
             const response = await api.post("/clients", data)
             const { password } = data
             const { email, id } = response.data;
-            localStorage.setItem("clientId", JSON.stringify(id));
+            localStorage.setItem("clientId", id);
             const res = await api.post("/login", { email, password })
             localStorage.setItem("clientToken", res.data.token)
-            contacts.forEach(async (data) => await api.post("/contacts", { data }, { headers: { Authorization: `Bearer ${res.data.token}` } }))
+            contacts.forEach(async (contactData) => await api.post("/contacts", { ...contactData }, { headers: { Authorization: `Bearer ${res.data.token}` } }))
             setUser(response.data)
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -58,8 +58,13 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
         }
     }
 
+    const removeItem = async (id: string) => {
+        const newList = contacts.filter((_, i) => i !== Number(id))
+        setContacts(newList)
+    }
+
     return (
-        <AuthContext.Provider value={{ signIn, register, user, setUser, contacts, setContacts, loading, setLoading }}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={{ signIn, register, user, setUser, contacts, setContacts, loading, setLoading, removeItem }}>{children}</AuthContext.Provider>
     )
 }
 

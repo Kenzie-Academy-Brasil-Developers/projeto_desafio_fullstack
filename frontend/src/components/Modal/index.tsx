@@ -23,7 +23,7 @@ export const Modal = ({ toggleModal }: ModalProps) => {
                 <button className="modal_card--close" onClick={toggleModal}>X</button>
 
                 <form className="form_container" onSubmit={handleSubmit(submit)}>
-                    <Input id="modal_name" type="text" placeholder="Nome completo" {...register("name")} error={errors.name && errors.name.message} />
+                    <Input id="modal_name" type="text" placeholder="Nome completo" {...register("full_name")} error={errors.full_name && errors.full_name.message} />
                     <Input id="modal_email" type="text" placeholder="Email" {...register("email")} error={errors.email && errors.email.message} />
                     <Input id="modal_tel" type="tel" placeholder="Telefone" {...register("telephone")} error={errors.telephone && errors.telephone.message} />
                     <button type="submit" className="form_button--submit" >Cadastrar</button>
