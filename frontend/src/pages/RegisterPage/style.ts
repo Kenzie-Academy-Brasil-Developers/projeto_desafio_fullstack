@@ -16,13 +16,6 @@ export const StyledRegisterPage = styled.main`
     align-items: center;
     flex-direction: column;
     color: var(--color-secondary);
-    > .stages_container {
-      width: 80%;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      margin: 2rem 0;
-    }
   }
   #loading {
     align-self: center;

@@ -54,7 +54,7 @@ export const LoginPage = () => {
                     <button className="form_button--submit " type="submit">Entrar</button>
                 </form>
             </div>
-            <ToastContainer className={"toast_container"} />
+            <ToastContainer />
         </StyledLoginPage>
     )
 }

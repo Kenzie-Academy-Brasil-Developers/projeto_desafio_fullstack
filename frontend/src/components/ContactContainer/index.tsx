@@ -4,29 +4,39 @@ import { ContactList } from "./ContactList"
 import { StyledContactContainer } from "./style"
 import { Modal } from "../Modal"
 import { useAuth } from "../../hooks/useAuth"
+import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 
 
 export const ContactContainer = () => {
 
     const { removeCount, addCount } = useRegister()
-    const { register } = useAuth();
+    const { register, contacts, setContacts } = useAuth();
     const navigate = useNavigate()
     const [modalState, setModalState] = useState<boolean>(false)
 
     const toggleModal = () => {
         setModalState(!modalState)
     }
-    const createUser = () => {
+
+    const backPage = () => {
+        setContacts([])
+        removeCount()
+    }
+    const createUser = async () => {
+        if (contacts.length === 0) {
+            return toast.warn("É necessário adicionar contatos")
+        }
         try {
             addCount()
             const clientInfo = localStorage.getItem("client_info")
             const parsedInfo = JSON.parse(clientInfo!)
             register(parsedInfo)
+            toast.success("Usuário criado com sucesso")
+            setContacts([])
             setTimeout(() => navigate("/dashboard"), 3000)
         } catch (error) {
-            removeCount()
-            console.log(error)
+            return console.log(error)
         }
     }
 
@@ -42,7 +52,7 @@ export const ContactContainer = () => {
             <ContactList />
 
             <div className="contact__buttons">
-                <button className="contact__button" onClick={removeCount}>Voltar</button>
+                <button className="contact__button" onClick={backPage}>Voltar</button>
                 <button className="contact__button" onClick={createUser}>Registrar</button>
             </div>
         </StyledContactContainer>

@@ -5,6 +5,7 @@ import { StyledDashboardContainer } from "./style"
 import { api } from "../../services/api"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../hooks/useAuth"
+import { toast, ToastContainer } from 'react-toastify';
 
 
 export const DashboardPage = () => {
@@ -19,10 +20,6 @@ export const DashboardPage = () => {
             try {
                 if (!token) return navigate("/")
 
-
-                if (!token) {
-                    return navigate("/")
-                }
                 const response = await api.get(`/clients/${clientId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -36,7 +33,8 @@ export const DashboardPage = () => {
                 setContacts(contacts.data)
                 setUser(response.data)
             } catch (error) {
-                console.log(error)
+                console.error(error)
+                return navigate("/")
             }
         }
         checkVerifications()
@@ -47,10 +45,12 @@ export const DashboardPage = () => {
     }
 
     const logout = () => {
-        localStorage.clear()
-        setUser(null)
-        setContacts([])
-        return navigate("/")
+        toast.success("Logout realizado com sucesso", { pauseOnHover: false, autoClose: 2000, theme: "dark" })
+        return setTimeout(() => {
+            localStorage.clear()
+            setUser(null)
+            setContacts([])
+        }, 2500)
     }
 
     return (
@@ -68,6 +68,8 @@ export const DashboardPage = () => {
                     <h3>Informações dos contatos</h3>
                     <DashboardList />
                 </div>
+
+                <ToastContainer />
 
             </div>
         </StyledDashboardContainer>

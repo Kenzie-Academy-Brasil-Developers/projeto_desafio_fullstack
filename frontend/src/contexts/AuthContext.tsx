@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { AuthContextProps, AuthContextValues, IContact, IUser, TLoginData, TRegisterData } from "../interfaces";
 import { jwtDecode } from 'jwt-decode';
 import { toast } from 'react-toastify';
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 
 
 export const AuthContext = createContext<AuthContextValues>({} as AuthContextValues)
@@ -25,16 +25,16 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
             localStorage.setItem("clientToken", response.data.token)
             const decoded = jwtDecode(response.data.token)
             localStorage.setItem("clientId", decoded.sub!)
-            toast.success("Login realizado com sucesso", { autoClose: 3000 })
+            toast.success("Login realizado com sucesso", { autoClose: 2000, pauseOnHover: false, theme: "dark" })
             setTimeout(() => {
                 navigate("/dashboard")
             }, 3000)
             return response
         } catch (error) {
             if (error instanceof AxiosError) {
-                toast.error(`${error.response?.data.message}`)
+                toast.error(`${error.response?.data.message}`, { autoClose: 2000, pauseOnHover: false, theme: "dark" })
             }
-            console.log(error)
+            return error
         }
 
     }
@@ -42,16 +42,19 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     const register = async (data: TRegisterData) => {
         try {
             const response = await api.post("/clients", data)
-            const { data: { email, password, id } } = response;
+            const { password } = data
+            const { email, id } = response.data;
             localStorage.setItem("clientId", JSON.stringify(id));
-            const logged = await api.post("/login", { email, password })
-                .then(res => {
-                    localStorage.setItem("clientToken", JSON.stringify(res.data.token))
-                })
-            contacts.forEach(async (data) => await api.post("/contacts", { data }))
-            return logged
+            const res = await api.post("/login", { email, password })
+            localStorage.setItem("clientToken", res.data.token)
+            contacts.forEach(async (data) => await api.post("/contacts", { data }, { headers: { Authorization: `Bearer ${res.data.token}` } }))
+            setUser(response.data)
         } catch (error) {
-            console.log(error)
+            if (axios.isAxiosError(error)) {
+                toast.error(error.response?.data.message)
+                return error
+            }
+            return error
         }
     }
 

@@ -6,6 +6,10 @@ export interface IContactItemProps {
   tel: string;
 }
 
+export interface IStageProps {
+  count: number;
+}
+
 export interface AuthContextProps {
   children: ReactNode;
 }
