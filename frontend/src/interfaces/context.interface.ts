@@ -22,6 +22,7 @@ export interface AuthContextValues {
   setContacts: React.Dispatch<React.SetStateAction<IContact[]>>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  removeItem: (id: string) => void;
 }
 
 export interface IUser {
@@ -34,7 +35,7 @@ export interface IUser {
 }
 
 export interface IContact {
-  name: string;
+  full_name: string;
   email: string;
   telephone: string;
 }

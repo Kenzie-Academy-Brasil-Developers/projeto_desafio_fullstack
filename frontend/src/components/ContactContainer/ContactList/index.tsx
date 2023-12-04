@@ -12,7 +12,7 @@ export const ContactList = () => {
             {contacts.length === 0 ?
                 <span className="contact__list--span">Você ainda não possui nenhum contato associado.</span>
                 :
-                contacts.map(({ name, telephone }, index) => <ContactItem key={index + 1} name={name} tel={telephone} />)
+                contacts.map(({ full_name, telephone }, index) => <ContactItem key={index + 1} id={String(index)} full_name={full_name} tel={telephone} />)
             }
         </ul>
     )

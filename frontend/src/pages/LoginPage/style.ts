@@ -84,6 +84,7 @@ export const StyledLoginPage = styled.main`
             justify-content: space-between;
             align-items: center;
             > input {
+              color: var(--gray-2);
               width: 80%;
               height: 2.25rem;
               background-color: transparent;

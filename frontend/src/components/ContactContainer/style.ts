@@ -52,6 +52,22 @@ export const StyledContactContainer = styled.div`
       padding: 0.5rem;
       border-radius: 4px;
       transition: 0.5s ease;
+      position: relative;
+
+      .contact_item--delete {
+        position: absolute;
+        font-weight: 600;
+        width: 1.75rem;
+        height: 1.5rem;
+        right: 0.4rem;
+        top: 0.4rem;
+        border-radius: 8px;
+        color: var(--gray-2);
+        background: transparent;
+      }
+      .contact_item--delete:hover {
+        background-color: var(--color-error);
+      }
 
       img {
         width: 70%;
