@@ -54,6 +54,6 @@ Dessa forma a aplicação rodará até a conexão com o servidor for cortada.
 Para rodar a aplicação do lado do cliente, mude para a pasta "frontend" e use o seguinte comando:
 
 ```powershell
-    cd backend  #caso ainda não esteja na pasta
+    cd frontend  #caso ainda não esteja na pasta
     npm run dev
 ```
