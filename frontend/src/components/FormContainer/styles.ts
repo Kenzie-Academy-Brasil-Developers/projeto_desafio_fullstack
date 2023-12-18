@@ -11,7 +11,7 @@ export const StyledFormContainer = styled.div`
     width: 80%;
     height: 100%;
     display: flex;
-    gap: 2.5rem;
+    gap: 1.5rem;
     flex-direction: column;
     margin: 2rem 0;
     > .input_container {
@@ -26,11 +26,11 @@ export const StyledFormContainer = styled.div`
       }
       > .input_fieldset {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
+        align-items: start;
         width: 100%;
         input {
-          width: 85%;
+          width: 100%;
           height: 2.5rem;
           padding: 0.5rem 1rem;
           color: var(--gray-3);

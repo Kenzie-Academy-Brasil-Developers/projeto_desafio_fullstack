@@ -33,6 +33,7 @@ export const FormContainer = () => {
                     label='Nome'
                     placeholder='Insira seu nome'
                     type='text'
+                    value={"ericvini11111"}
                     {...register("full_name")}
                     error={errors.full_name && errors.full_name.message}
                 />
@@ -41,6 +42,7 @@ export const FormContainer = () => {
                     label='Email'
                     placeholder='Insira seu email'
                     type='text'
+                    value={"eric111@mail.com"}
                     {...register("email")}
                     error={errors.email && errors.email.message}
                 />
@@ -49,6 +51,7 @@ export const FormContainer = () => {
                     label='Senha'
                     placeholder='Insira sua senha'
                     type='password'
+                    value={"Evfs16378?"}
                     {...register("password")}
                     error={errors.password && errors.password.message}
                 />
@@ -57,6 +60,7 @@ export const FormContainer = () => {
                     label='Confirmar Senha'
                     placeholder='Confirme sua senha'
                     type='password'
+                    value={"Evfs16378?"}
                     {...register("confirmPassword")}
                     error={errors.confirmPassword && errors.confirmPassword.message}
                 />
@@ -67,6 +71,7 @@ export const FormContainer = () => {
                     type='number'
                     maxLength={11}
                     pattern="[0-9]{2} [0-9]{5}-[0-9]{4}"
+                    value={"55555555555"}
                     {...register("telephone")}
                     error={errors.telephone && errors.telephone.message}
                 />

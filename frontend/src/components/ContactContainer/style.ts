@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 export const StyledContactContainer = styled.div`
   width: 80%;
-  height: 80%;
+  height: auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  min-height: 32rem;
   .contact__heading {
     width: 100%;
-    height: 12%;
+    height: 20%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -32,8 +33,8 @@ export const StyledContactContainer = styled.div`
   }
 
   .contact__list {
-    height: 75%;
     padding: 2rem;
+    height: 24rem;
     border: 1px solid var(--color-secondary);
     border-radius: 4px;
     display: flex;

@@ -12,8 +12,8 @@ export const ContactContainer = () => {
 
     const { removeCount, addCount } = useRegister()
     const { register, contacts, setContacts, setUser } = useAuth();
-    const navigate = useNavigate()
     const [modalState, setModalState] = useState<boolean>(false)
+    const navigate = useNavigate()
 
     const toggleModal = () => {
         setModalState(!modalState)
@@ -23,6 +23,7 @@ export const ContactContainer = () => {
         setContacts([])
         removeCount()
     }
+
     const createUser = async () => {
         if (contacts.length === 0) {
             return toast.warn("É necessário adicionar contatos")
