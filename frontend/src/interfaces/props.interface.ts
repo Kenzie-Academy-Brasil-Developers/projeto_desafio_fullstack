@@ -38,9 +38,3 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
 export interface ModalProps {
   toggleModal: () => void;
 }
-
-export interface IModalFields {
-  full_name: string;
-  email: string;
-  telephone: string;
-}

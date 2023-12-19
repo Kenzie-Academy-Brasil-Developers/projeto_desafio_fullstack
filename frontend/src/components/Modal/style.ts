@@ -50,6 +50,9 @@ export const StyledModalContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    #id_number {
+      display: none;
+    }
     > .input_container {
       width: 100%;
       position: relative;

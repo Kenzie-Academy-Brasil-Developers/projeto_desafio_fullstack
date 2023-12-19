@@ -2,7 +2,12 @@
 
 ## Introdução à aplicação
 
-Essa é uma aplicação Fullstack desenvolvida por mim utilizando Nest JS para criação e manipulação do lado do servidor e React JS com Vite para criação e interação do lado do cliente.A aplicação possui um sistema de Cadastro/Login para autenticação de informações, onde é possível criar seu usuário com seus dados e associar contatos próximos como família ou amigos! Após o registro suas informações serão mostradas em tela.
+Essa é uma aplicação Fullstack que desenvolvi utilizando Nest JS para criação e manipulação do lado do servidor e React JS com Vite para criação e interação do lado do cliente.A aplicação possui um sistema de Cadastro/Login para autenticação de informações, onde é possível criar seu usuário com seus dados e associar contatos próximos como família ou amigos! Após o registro suas informações serão mostradas em tela.
+
+## Requisitos
+
+- Possuir git instalado na máquina
+- Possuir node JS instalado na máquina(para o uso do gerenciador de pacotes 'npm')
 
 ## Configurando o Ambiente
 
@@ -49,6 +54,9 @@ Para rodar a aplicação do lado do servidor, mude para a pasta "backend" e use 
     cd backend  #caso ainda não esteja na pasta
     npm run start:dev
 ```
+
+> Após esse comando é possível entrar em <http://localhost:3000/docs> para acessar a documentação sobre os
+> **endpoints** possíveis e **autenticações** necessárias para cada.
 
 Dessa forma a aplicação rodará até a conexão com o servidor for cortada.
 Para rodar a aplicação do lado do cliente, mude para a pasta "frontend" e use o seguinte comando:

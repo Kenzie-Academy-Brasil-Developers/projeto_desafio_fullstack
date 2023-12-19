@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledContactContainer = styled.div`
   width: 80%;
-  height: auto;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -34,7 +34,7 @@ export const StyledContactContainer = styled.div`
 
   .contact__list {
     padding: 2rem;
-    height: 24rem;
+    height: 22rem;
     border: 1px solid var(--color-secondary);
     border-radius: 4px;
     display: flex;
@@ -65,6 +65,7 @@ export const StyledContactContainer = styled.div`
         border-radius: 8px;
         color: var(--gray-2);
         background: transparent;
+        z-index: 15;
       }
       .contact_item--delete:hover {
         background-color: var(--color-error);

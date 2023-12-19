@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import { createContext } from "react";
+import { MouseEvent, createContext } from "react";
 import { api } from '../services/api';
 import { useState } from 'react';
-import { AuthContextProps, AuthContextValues, IContact, IUser, TLoginData, TRegisterData } from "../interfaces";
+import { AuthContextProps, AuthContextValues, IUser, TLoginData, TRegisterData } from "../interfaces";
 import { jwtDecode } from 'jwt-decode';
 import { toast } from 'react-toastify';
 import axios, { AxiosError } from 'axios';
+import { TModalSchema } from '../components/Modal/validator';
 
 
 export const AuthContext = createContext<AuthContextValues>({} as AuthContextValues)
@@ -16,8 +17,10 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     const navigate = useNavigate();
 
     const [user, setUser] = useState<IUser | null>(null);
-    const [contacts, setContacts] = useState<IContact[]>([])
+    const [contacts, setContacts] = useState<TModalSchema[]>([])
+    const [modalUser, setModalUser] = useState<TModalSchema | null>(null);
     const [loading, setLoading] = useState(true)
+    const [modalState, setModalState] = useState<boolean>(false)
 
     const signIn = async (data: TLoginData) => {
         try {
@@ -63,8 +66,35 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
         setContacts(newList)
     }
 
+    const toggleModal = () => {
+        if (modalState) {
+            setModalState(false)
+
+        } else {
+            setModalState(true)
+        }
+    }
+
+    const getModalInfo = (event: MouseEvent) => {
+        const element = event.currentTarget;
+        if (!(event.target instanceof HTMLButtonElement)) {
+            const foundContact: TModalSchema | undefined = contacts.find((_, i) => element.id === String(i));
+            if (!foundContact) {
+                return undefined
+            }
+            setModalUser(foundContact)
+            toggleModal()
+        }
+
+    }
+
     return (
-        <AuthContext.Provider value={{ signIn, register, user, setUser, contacts, setContacts, loading, setLoading, removeItem }}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={{
+            signIn, register, user, setUser,
+            contacts, setContacts, loading,
+            setLoading, removeItem, modalUser,
+            setModalUser, getModalInfo, modalState, setModalState, toggleModal
+        }}>{children}</AuthContext.Provider>
     )
 }
 

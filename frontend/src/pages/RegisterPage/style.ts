@@ -17,4 +17,7 @@ export const StyledRegisterPage = styled.main`
     align-self: center;
     margin: auto;
   }
+  @media (min-width: 768px) {
+    height: 100vh;
+  }
 `;

@@ -1,5 +1,4 @@
 import {
-  IContact,
   IUser,
   RegisterContextValues,
   TLoginData,
@@ -12,13 +11,11 @@ import {
   IDashboardListItem,
   IFieldsetProps,
   IInputProps,
-  IModalFields,
   ModalProps,
   RegisterContextProps,
 } from "./props.interface";
 
 export type {
-  IContact,
   IUser,
   RegisterContextValues,
   AuthContextProps,
@@ -27,7 +24,6 @@ export type {
   IDashboardListItem,
   IFieldsetProps,
   IInputProps,
-  IModalFields,
   ModalProps,
   RegisterContextProps,
   TLoginData,

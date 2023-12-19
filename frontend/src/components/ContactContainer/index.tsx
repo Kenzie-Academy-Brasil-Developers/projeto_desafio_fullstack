@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { useRegister } from "../../hooks/useRegister"
 import { ContactList } from "./ContactList"
 import { StyledContactContainer } from "./style"
@@ -11,13 +10,8 @@ import { useNavigate } from "react-router-dom"
 export const ContactContainer = () => {
 
     const { removeCount, addCount } = useRegister()
-    const { register, contacts, setContacts, setUser } = useAuth();
-    const [modalState, setModalState] = useState<boolean>(false)
+    const { register, contacts, setContacts, setUser, modalState, toggleModal } = useAuth();
     const navigate = useNavigate()
-
-    const toggleModal = () => {
-        setModalState(!modalState)
-    }
 
     const backPage = () => {
         setContacts([])
