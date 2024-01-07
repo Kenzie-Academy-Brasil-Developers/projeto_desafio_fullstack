@@ -1,73 +1,117 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Endpoints
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+> A URL base é http://localhost:3000 ou a que foi usada quando iniciado a aplicação backend.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+| Métodos | Endpoint               | Função                                 | Autenticação                |
+| ------- | ---------------------- | -------------------------------------- | --------------------------- |
+| POST    | /login                 | Gerar token de autenticação            | Sem autenticação necessária |
+| POST    | /clients               | Criação de usuário/cliente             | Sem autenticação necessária |
+| GET     | /clients               | Recuperação de usuários registrados    | Sem autenticação necessária |
+| GET     | /clients/<client_id>   | Recuperar informações de um cliente    | Autenticação necessária     |
+| PATCH   | /clients/<client_id>   | Alteração de informações de um clients | Autenticação necessária     |
+| DELETE  | /clients/<client_id>   | Excluir usuário                        | Autenticação necessária     |
+| GET     | /contacts              | Recuperação de usuários                | Autenticação necessária     |
+| POST    | /contacts              | Criação de contatos                    | Autenticação necessária     |
+| PATCH   | /contacts/<contact_id> | Atualização de contatos                | Autenticação necessária     |
+| DELETE  | /contacts/<contact_id> | Deleção de contatos                    | Autenticação necessária     |
 
-## Description
+## Corpo de Requisição
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### POST - /clients
 
-## Installation
+- Rota para criação de usuário com os seguintes dados:
+  - **Nome Completo**: Uma string e obrigatória, mínimo de 1 caractere e máximo de 151 caracteres.
+  - **Email**: Uma string e obrigatório, não pode ser vazia e deve ter o formato de email e deve ser único.
+  - **Password**: Uma string e obrigatório, deve ter no mínimo 8 caracteres, sendo uma letra minúscula, uma maiúscula e um número.
+  - **Telefone**: Uma string e obrigatória, deve ter 11 caracteres.
 
-```bash
-$ npm install
-```
+#### Formato de corpo de requisição esperado
 
-## Running the app
+<img src="./img/corpoRequestCreate.png" alt="Corpo de requisição">
 
-```bash
-# development
-$ npm run start
+#### Formato de corpo de resposta esperado
 
-# watch mode
-$ npm run start:dev
+<img src="./img/corpoResponseCreateClient.png" alt="Imagem de corpo de requisição exemplo">
 
-# production mode
-$ npm run start:prod
-```
+### POST - /login
 
-## Test
+- Rota para geração de token com os seguintes dados:
+  - **Email**: Uma string e obrigatório, não pode ser vazia e deve ter o formato de email e deve ser único.
+  - **Password**: Uma string e obrigatório, deve ter no mínimo 8 caracteres, sendo uma letra minúscula, uma maiúscula e um número.
 
-```bash
-# unit tests
-$ npm run test
+#### Formato de corpo de requisição esperado
 
-# e2e tests
-$ npm run test:e2e
+<img src="./img/authRequest.png" alt="Corpo de requisição">
 
-# test coverage
-$ npm run test:cov
-```
+#### Formato de corpo de resposta esperado
 
-## Support
+<img src="./img/authResponse.png" alt="Imagem de corpo de resposta exemplo">
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### GET - /clients
 
-## Stay in touch
+- Rota para recuperação de clientes já registrados
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+#### Formato de corpo de resposta esperado
 
-## License
+<img src="./img/ClientGetResponse.png" alt="Imagem de corpo de resposta exemplo">
 
-Nest is [MIT licensed](LICENSE).
+### GET - /clients/<client_id>
+
+- Rota para recuperação de um cliente específico, que depende diretamente do token que é enviado, deve receber token e o id do cliente.
+
+#### Formato de corpo de resposta esperado
+
+<img src="./img/clientRetrieveResponse.png" alt="Imagem de corpo de resposta exemplo">
+
+### PATCH - /clients/<client_id>
+
+- Rota para atualizar as informações pessoais de um cliente específico, deve receber token e o id do cliente.
+- Não é possível alterar o **id** e nem o **register_date**
+- Usuários só podem atualizar suas próprias informações.
+
+#### Formato de corpo de resposta esperado
+
+<img src="./img/responsePatchClient.png" alt="Imagem de corpo de resposta exemplo">
+
+### DELETE - /clients/<client_id>
+
+- Rota para deletar o usuário da aplicação, deve receber token e o id do cliente.
+- Não possui corpo de resposta
+
+### GET - /contacts
+
+- Rota para recuperação de contatos associados ao cliente, identificado pela passagem do token
+
+#### Formato de corpo de resposta esperado
+
+<img src="./img/getContactsReponse.png" alt="Imagem de corpo de resposta exemplo">
+
+### POST - /contacts
+
+- Rota para criação de contatos associados a um cliente, identificado pela passagem do token
+  - **Nome Completo**: Uma string e obrigatória, mínimo de 1 caractere e máximo de 151 caracteres.
+  - **Email**: Uma string e obrigatório, não pode ser vazia e deve ter o formato de email e deve ser único.
+  - **Telefone**: Uma string e obrigatória, deve ter 11 caracteres.
+
+#### Formato de corpo de requisição esperado
+
+<img src="./img/createContactRequest.png" alt="Corpo de requisição">
+
+#### Formato de corpo de resposta esperado
+
+<img src="./img/createContactResponse.png" alt="Imagem de corpo de resposta exemplo">
+
+### PATCH - /contacts/<contact_id>
+
+- Rota para atualizar as informações de um contato do cliente, deve receber token e o id do contato
+- Não é possível alterar o **id**,o **register_date** e nem o **clientId**.
+- Usuários só podem atualizar suas próprias informações.
+
+#### Formato de corpo de resposta esperado
+
+<img src="./img/patchContactResponse.png" alt="Imagem de corpo de resposta exemplo">
+
+### DELETE - /contacts/<contact_id>
+
+- Rota para deletar um contato da aplicação, deve receber token e o id do contato.
+- Não possui corpo de resposta

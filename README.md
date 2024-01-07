@@ -65,3 +65,7 @@ Para rodar a aplicação do lado do cliente, mude para a pasta "frontend" e use 
     cd frontend  #caso ainda não esteja na pasta
     npm run dev
 ```
+
+## Sobre os Endpoints
+
+[Documentação dos Endpoints](/backend/README.md)
