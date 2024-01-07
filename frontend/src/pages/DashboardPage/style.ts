@@ -19,14 +19,14 @@ export const StyledDashboardContainer = styled.div`
     justify-content: center;
     > .client_card--profile {
       width: 75%;
-      height: 30%;
+      height: 40%;
       color: var(--gray-2);
       display: flex;
       flex-direction: column;
       gap: 1rem;
       position: relative;
       #logout {
-        width: 10%;
+        width: 30%;
         height: 18%;
         background-color: var(--color-secondary);
         border-radius: 4px;
@@ -39,7 +39,8 @@ export const StyledDashboardContainer = styled.div`
       #logout:hover {
         background-color: var(--color-error);
       }
-      s h3 {
+      h3 {
+        width: 60%;
         color: var(--color-secondary);
       }
       .info_fieldset {
@@ -56,6 +57,20 @@ export const StyledDashboardContainer = styled.div`
       color: var(--gray-2);
       display: flex;
       flex-direction: column;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .client_card .client_card--profile #logout {
+      width: 15%;
+      height: 15%;
+    }
+    .client_card .client_card--profile {
+      height: 32%;
+
+      h3 {
+        color: var(--color-secondary);
+      }
     }
   }
 `;
